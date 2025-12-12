@@ -23,7 +23,6 @@ android {
 }
 
 dependencies {
-  api deps.conceal
   implementation deps.gson
 
   testImplementation deps.junit
