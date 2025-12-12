@@ -1,4 +1,3 @@
-apply plugin: 'maven'
 apply plugin: 'signing'
 
 version = VERSION_NAME
@@ -20,45 +19,45 @@ if (isReleaseBuild()) {
 }
 
 afterEvaluate { project ->
-  uploadArchives {
-    repositories {
-      mavenDeployer {
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-        pom.artifactId = POM_ARTIFACT_ID
-        repository(url: sonatypeRepositoryUrl) {
-          try {
-            authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
-          } catch (Exception e) {
-            println "mavenUser or mavenPassword is missing"
-          }
-        }
-        pom.project {
-          name POM_NAME
-          packaging POM_PACKAGING
-          description POM_DESCRIPTION
-          url POM_URL
-          scm {
-            url POM_SCM_URL
-            connection POM_SCM_CONNECTION
-            developerConnection POM_SCM_DEV_CONNECTION
-          }
-          licenses {
-            license {
-              name POM_LICENCE_NAME
-              url POM_LICENCE_URL
-              distribution POM_LICENCE_DIST
-            }
-          }
-          developers {
-            developer {
-              id POM_DEVELOPER_ID
-              name POM_DEVELOPER_NAME
-            }
-          }
-        }
-      }
-    }
-  }
+//  uploadArchives {
+//    repositories {
+//      mavenDeployer {
+//        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+//        pom.artifactId = POM_ARTIFACT_ID
+//        repository(url: sonatypeRepositoryUrl) {
+//          try {
+//            authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+//          } catch (Exception e) {
+//            println "mavenUser or mavenPassword is missing"
+//          }
+//        }
+//        pom.project {
+//          name POM_NAME
+//          packaging POM_PACKAGING
+//          description POM_DESCRIPTION
+//          url POM_URL
+//          scm {
+//            url POM_SCM_URL
+//            connection POM_SCM_CONNECTION
+//            developerConnection POM_SCM_DEV_CONNECTION
+//          }
+//          licenses {
+//            license {
+//              name POM_LICENCE_NAME
+//              url POM_LICENCE_URL
+//              distribution POM_LICENCE_DIST
+//            }
+//          }
+//          developers {
+//            developer {
+//              id POM_DEVELOPER_ID
+//              name POM_DEVELOPER_NAME
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
   signing {
     required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
@@ -67,11 +66,11 @@ afterEvaluate { project ->
     source = android.sourceSets.main.java.sourceFiles
   }
   task androidJavadocsJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from androidJavadocs.destinationDir
   }
   task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from android.sourceSets.main.java.sourceFiles
   }
   artifacts {
@@ -83,7 +82,7 @@ afterEvaluate { project ->
 // build a jar with source files
 task sourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
+  archiveClassifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
@@ -94,6 +93,6 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
+  archiveClassifier = 'javadoc'
   from javadoc.destinationDir
 }

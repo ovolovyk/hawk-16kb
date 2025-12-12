@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+  namespace 'com.orhanobut.benchmark'
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.orhanobut.benchmark"
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion 26
+    compileSdkVersion 36
+    targetSdkVersion 36
     versionCode 1
     versionName "1.0"
   }
@@ -16,6 +18,10 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
   }
 }
 
