@@ -9,12 +9,12 @@ import org.junit.runner.RunWith
 import com.google.common.truth.Truth.assertThat
 
 @RunWith(AndroidJUnit4::class)
-class KeystoreEncryptionTest {
+class ReverserEncryptionTest {
 
   private lateinit var encryption: Encryption
 
   @Before fun setup() {
-    encryption = KeystoreEncryption()
+    encryption = ReverserEncryption()
   }
 
   @Test fun init() {

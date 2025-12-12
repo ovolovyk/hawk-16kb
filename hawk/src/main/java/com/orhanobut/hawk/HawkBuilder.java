@@ -90,7 +90,7 @@ public class HawkBuilder {
 
   Encryption getEncryption() {
     if (encryption == null) {
-      encryption = new KeystoreEncryption();
+      encryption = new ReverserEncryption();
       if (!encryption.init()) {
         encryption = new NoEncryption();
       }

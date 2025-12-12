@@ -5,7 +5,7 @@ package com.orhanobut.hawk;
  *
  * <p>Use custom implementation if built-in implementation is not enough.</p>
  *
- * @see KeystoreEncryption
+ * @see ReverserEncryption
  */
 public interface Encryption {
 
